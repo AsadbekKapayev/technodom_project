@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Make order</h2>
+<form th:method="POST" th:action="@{/baskets}">
+    <label for="city">Choose city </label>
+    <select id="city" name="city">
+        <p th:each="city : ${cities}" >
+            <option th:value="${city.name}" th:text="${city.name}"></option>
+        </p>
+    </select>
+    <label for="date">Choose date </label>
+    <input type="date" id="date" name="date">
+    <label for="startSlot">Start slot </label>
+    <input type="time" step="3600" id="startSlot" name="startSlot">
+    <label for="endSlot">End slot </label>
+    <input type="time" step="3600" id="endSlot" name="endSlot">
+    <input type="submit" value="Make order">
+</form>
+<br/>
+<br/>
+<span th:each="basket : ${baskets}">
+    <p th:text="${basket.product.name}"></p>
+    <p th:text="${basket.product.weight}"></p>
+    <p th:text="${basket.quantity}"></p>
+    <form th:method="DELETE" th:action="@{/baskets/{id}(id=${basket.getId()})}">
+        <input type="submit" th:value="Delete" />
+    </form>
+    <hr/>
+</span>
+</body>
+</html>

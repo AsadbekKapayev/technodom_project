@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p th:text="${product.name}"></p>
+<p th:text="${product.weight}"></p>
+<form th:method="POST" th:action="@{/products/{id}(id=${product.getId()})}">
+    <label for="quantity">Enter quantity: </label>
+    <input type="number" name="quantity" id="quantity"><br/>
+    <input type="submit" value="Add to basket">
+</form>
+</body>
+</html>
