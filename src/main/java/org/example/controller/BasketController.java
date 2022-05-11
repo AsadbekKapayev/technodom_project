@@ -1,15 +1,14 @@
 package org.example.controller;
 
 import org.example.dao.ProductsDAO;
-import org.example.model.Basket;
-import org.example.model.Product;
-import org.example.model.ProductBasket;
+import org.example.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.sql.Time;
+import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,13 +34,17 @@ public class BasketController {
     }
 
     @PostMapping()
-    public String createOrder(@RequestParam String city,
-                              @RequestParam String date,
-                              @RequestParam String startSlot,
-                              @RequestParam String endSlot) {
-        System.out.println(date.isEmpty());
-        System.out.println("hello");
-        return null;
+    public String createOrder(@RequestParam int city,
+                              @RequestParam Date date,
+                              @RequestParam Time startSlot,
+                              @RequestParam Time endSlot) {
+        if (date != null && startSlot != null && endSlot != null) {
+            List<Transport> transports = productsDAO.findTransportsByCity(city);
+            Transport transport = transports.stream()
+                    .findAny().orElse(null);
+            productsDAO.addSlot(new Slot(0, (int)transport.getId(), date, startSlot, endSlot));
+        }
+        return "redirect:/baskets";
     }
 
     @DeleteMapping("/{id}")
