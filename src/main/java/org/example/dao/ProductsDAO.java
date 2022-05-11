@@ -49,6 +49,6 @@ public class ProductsDAO {
     }
 
     public List<Transport> findTransportsByCity(int id) {
-        return jdbcTemplate.query("SELECT * FROM transport WHERE city_id=?", new BeanPropertyRowMapper<>(Transport.class));
+        return jdbcTemplate.query("SELECT * FROM transport WHERE city_id=?", new Object[]{id}, new BeanPropertyRowMapper<>(Transport.class));
     }
 }

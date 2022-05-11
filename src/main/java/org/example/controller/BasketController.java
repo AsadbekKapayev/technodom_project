@@ -34,15 +34,15 @@ public class BasketController {
     }
 
     @PostMapping()
-    public String createOrder(@RequestParam int city,
-                              @RequestParam Date date,
-                              @RequestParam Time startSlot,
-                              @RequestParam Time endSlot) {
+    public String createOrder(@RequestParam String city,
+                              @RequestParam String date,
+                              @RequestParam String startSlot,
+                              @RequestParam String endSlot) {
         if (date != null && startSlot != null && endSlot != null) {
-            List<Transport> transports = productsDAO.findTransportsByCity(city);
+            List<Transport> transports = productsDAO.findTransportsByCity(Integer.parseInt(city));
             Transport transport = transports.stream()
                     .findAny().orElse(null);
-            productsDAO.addSlot(new Slot(0, (int)transport.getId(), date, startSlot, endSlot));
+            productsDAO.addSlot(new Slot(0, (int)transport.getId(), Date.valueOf(date), Time.valueOf(startSlot.concat(":00")), Time.valueOf(endSlot.concat(":00"))));
         }
         return "redirect:/baskets";
     }
