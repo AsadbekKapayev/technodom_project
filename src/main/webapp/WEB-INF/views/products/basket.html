@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+<a th:href="@{/products}">products</a>
 <h2>Make order</h2>
 <form th:method="POST" th:action="@{/baskets}">
     <label for="city">Choose city </label>
@@ -15,12 +16,18 @@
     </select><br/>
     <label for="date">Choose date </label>
     <input type="date" id="date" name="date"><br>
-    <label for="startSlot">Start slot </label>
+    <label for="startSlot">Start slot max 8:00</label>
     <input type="time" step="3600" id="startSlot" name="startSlot"><br>
-    <label for="endSlot">End slot </label>
+    <label for="endSlot">End slot max 18:00</label>
     <input type="time" step="3600" id="endSlot" name="endSlot"><br>
     <input type="submit" value="Make order">
 </form>
+<br/>
+This order slot is busy
+<p th:text="${slots.transport_day}"></p>
+<p th:text="${slots.start_slot}"></p>
+<p th:text="${slots.end_slot}"></p>
+
 <br/>
 <br/>
 <span th:each="basket : ${baskets}">

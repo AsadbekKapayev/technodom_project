@@ -1,11 +1,11 @@
 package org.example.model;
 
-public class ProductBasket {
+public class ProductBasketMapper {
     private long id;
     private Product product;
     private int quantity;
 
-    public ProductBasket(long id, Product product, int quantity) {
+    public ProductBasketMapper(long id, Product product, int quantity) {
         this.id = id;
         this.product = product;
         this.quantity = quantity;

@@ -31,6 +31,11 @@ public class ProductsDAO {
                 .findAny().orElse(null);
     }
 
+    public Slot getSlot(int id) {
+        return jdbcTemplate.query("SELECT * FROM slot WHERE id=?", new Object[]{id}, new BeanPropertyRowMapper<>(Slot.class)).stream()
+                .findAny().orElse(null);
+    }
+
     public void addToBasket(int productId, int quantity) {
         jdbcTemplate.update("INSERT INTO basket(product_id, quantity) VALUES (?, ?)", productId, quantity);
     }
@@ -58,6 +63,10 @@ public class ProductsDAO {
 
     public void addProductToSlot(int slotId, int productId) {
         jdbcTemplate.update("INSERT INTO product_slot(product_id, slot_id) VALUES (?, ?)", productId, slotId);
+    }
+
+    public List<ProductSlot> getProductSlots() {
+        return jdbcTemplate.query("SELECT * FROM product_slot", new BeanPropertyRowMapper<>(ProductSlot.class));
     }
 
     public void removeAllBasket() {

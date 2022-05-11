@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<span th:each="mapper : ${mappers}">
+    <p th:text="${mapper.slot.transport_day}"></p>
+    <p th:text="${mapper.slot.start_slot}"></p>
+    <p th:text="${mapper.slot.end_slot}"></p>
+    <p th:text="${mapper.product.name}"></p>
+    <p th:text="${mapper.product.weight}"></p>
+    <hr/>
+</span>
+</body>
+</html>

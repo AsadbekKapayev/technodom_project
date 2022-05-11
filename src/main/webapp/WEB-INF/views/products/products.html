@@ -5,11 +5,14 @@
     <title>Title</title>
 </head>
 <body>
+<h2>Products</h2>
 <span th:each="product : ${products}">
     <a th:href="@{/products/{id}(id=${product.id})}" th:text="${product.name}"></a><br/>
 </span>
 <br/>
 <br/>
 <a th:href="@{/baskets}">My basket</a>
+<br/>
+<a th:href="@{/orders}">My orders</a>
 </body>
 </html>
