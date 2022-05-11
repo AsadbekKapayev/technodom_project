@@ -48,7 +48,19 @@ public class ProductsDAO {
                 slot.getTransport_id(), slot.getTransport_day(), slot.getStart_slot(), slot.getEnd_slot());
     }
 
+    public List<Slot> getSlots() {
+        return jdbcTemplate.query("SELECT * FROM slot", new BeanPropertyRowMapper<>(Slot.class));
+    }
+
     public List<Transport> findTransportsByCity(int id) {
         return jdbcTemplate.query("SELECT * FROM transport WHERE city_id=?", new Object[]{id}, new BeanPropertyRowMapper<>(Transport.class));
+    }
+
+    public void addProductToSlot(int slotId, int productId) {
+        jdbcTemplate.update("INSERT INTO product_slot(product_id, slot_id) VALUES (?, ?)", productId, slotId);
+    }
+
+    public void removeAllBasket() {
+        jdbcTemplate.update("DELETE FROM basket");
     }
 }
